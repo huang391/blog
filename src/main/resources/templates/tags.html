@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewpor" content="width=device-width, initial-scale=1.0"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+		<link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+		<title>标签</title>
+		
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav class="ui inverted attached segment m-padded-tb-mini">
+			<div class="ui container">
+				<div class="ui inverted secondary stackable menu">
+					<h2 class="ui teal header item">Blog</h2>
+					<a href="#" th:href="@{/}" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+					<a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+					<a href="#" th:href="@{/tags/-1}" class="active m-item item m-mobile-hide"><i class="tag icon"></i>标签</a>
+<!--					<a href="#" th:href="@{/guidang}" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>-->
+					<a href="#" th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+					<div class="right m-item item m-mobile-hide">
+						<div class="ui icon input">
+							<input type="text"  placeholder="Search..."/>
+							<i class=" orange search link icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+				<i class="sidebar icon"></i>menu
+			</a>
+		</nav>
+		
+		<!-- 中间内容 -->
+			<div class="m-container-big m-padded-tb-big">
+				<div class="ui container">
+					<div class="ui top attached segment">
+							        <!--<p>分段1</p>-->
+						<div class="ui middle aligned two column grid">
+							<div class="column">
+							    <h3 class="ui teal header">标签</h3>
+							</div>
+							<div class="right aligned column">
+							     <div class="right aligned column">
+									共<h2 class="ui orange header m-inline-block" th:text="${#arrays.length(tags)}">14</h2>篇
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui attached segment">
+						<div class="ui mini labeled button" th:each="tag : ${tags}">
+							<a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui mini button" th:classappend="${tag.id==active}? 'teal'">
+							  <span  th:text="${tag.name}">思考与感悟</span>
+							</a>
+							<div class="ui basic  left pointing label" th:classappend="${tag.id==active}? 'teal'" th:text="${#arrays.length(tag.blogs)}">
+							    1,048
+							</div>
+						</div>
+					</div>
+					<!--文章-->
+					<div class="ui top attached teal segment m-padded-tb-big">
+						<!--<p>分段2</p>-->
+						<div class="ui padded vertical segment  m-padded-tb-large"  th:each="blog : ${page.content}">
+							<div class="ui middle aligned mobile reversed stackable grid ">
+								<div class="eleven wide column">
+									<h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">你真的了解自己吗？</a></h3>
+									<p class="m-text" th:text="|${blog.description}...|">网格布局是一种比较早的概念了。semantic的网格布局和其他css框架的也是类似的，使用方法有点区别。</p>
+									<div class="ui grid">
+										<div class="eleven wide column">
+											<div class="ui horizontal link list">
+												<div class="item">
+													<img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}" class="ui avatar image" alt="">
+													<div class="content"><a href="#" class="header" th:src="${blog.user.username}" >HRL</a></div>
+												</div>
+												<div class="item">
+													<i class="calendar icon"></i><span  th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-10-01</span>
+												</div>
+												<div class="item">
+													<i class="eye icon"></i><span th:text="${blog.views}">2021</span>
+												</div>
+											</div>
+										</div>
+										<div class="right aligned five wide column">
+											<a href="#" th:href="@{/types/{id}(id=${blog.type.id})}" target="_blank" class="ui  teal label" th:text="${blog.type.name}">分类</a>
+										</div>
+									</div>
+										<div class="row">
+											<div class="column">
+												<a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing label m-padded-tb-mini" th:classappend="${tag.id==active}? 'teal'"  th:each="tag :${blog.tags}" th:text="${tag.name}">标签</a>
+											</div>
+										</div>
+								</div>
+								<div class="five wide column">
+									<a href="#" th:href="@{/blog/{id}(id=${blog.id})}">
+										<img src="https://unsplash.it/800/400?image=1005" class="ui rounded image" alt="" th:src="@{${blog.firstPicture}}" />
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui bottom attached segment" th:if="${page.totalPages>1}">
+						<div class="ui two column grid">
+							<div class="column">
+								<a th:href="@{/(page=${page.number}-1)}" class="ui teal button" th:unless="${page.first}">上一页</a>
+
+							</div>
+							<div class="right aligned column">
+								<a th:href="@{/(page=${page.number}+1)}" class="ui teal button" th:unless="${page.last}">下一页</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		<!-- 底部footer -->
+		<footer class="ui inverted vertical segment m-padded-tb-big m-padded-lr-big">
+			<div calss="ui container">
+				<div class="ui center aligned row stackable grid orange divided m-padded-lr-big m-padded-tb-mini">
+					  <div class="three wide column">
+					  	<img src="../static/img/tu01.jpg" th:src="@{/img/tu01.jpg}" class="ui rounded image centered" alt="" style="width:100px"/>
+					  </div>
+					  <div class="three wide column">
+					  	<h4 calss="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item">用户故事32132132132</a>
+							<a href="#" class="item">用户故事</a>
+							<a href="#" class="item">用户故事</a>
+						</div>
+					  </div>
+					  <div class="three wide column">
+					  	<h4 calss="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item">Email: 1554213061@qq.com</a>
+							<a href="#" class="item">电话: 134xxx9380</a>
+						</div>
+					  </div>
+					  <div class="seven wide column">
+					  	<h4 calss="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item m-text-thin m-text-spaced m-opcity">这是我的博客这是我的博客这是我的博客这是我的博客这是我的博客这是我的博客</a>
+						</div>
+					  </div><!--4个4为16，后面的另起一行-->
+					</div>
+
+				<div class="ui inverted section divider"></div>
+				<p class="ui center aligned container m-text-thin m-text-spaced m-opacity-big">Copyright @ 2020 - 2021 Designed by HuangRiLong</p>
+			</div>
+			
+		</footer>
+		
+		
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+		<script>
+			$('.menu.toggle').click(function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			
+			$('#paybutton').popup({
+				popup : $('.pay.popup'),
+				on : 'click',
+				position:'bottom center'
+			});
+		</script>
+	</body>
+</html>

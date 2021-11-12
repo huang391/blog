@@ -1,0 +1,131 @@
+body{
+	background: url("../img/bg.png");
+}
+
+
+
+.m-padded-tb-mini{
+	padding-top: 0.2em !important;
+	padding-bottom: 0.2em !important;
+}
+.m-padded-tb-large{
+	padding-top: 0.8em !important;
+	padding-bottom: 0.8em !important;
+	margin-bottom: 0.4em !important;
+	margin-top: 0.4em !important;
+}
+.m-padded-tb-big{
+	padding-top: 2em !important;
+	padding-bottom: 2em !important;
+}
+.m-padded-tb-huge{
+	padding-top: 3em !important;
+	padding-bottom: 3em !important;
+}
+
+.m-padded-tb-massive{
+		padding-top: 5em !important;
+	padding-bottom: 5em !important;
+}
+.m-padded-lr-big{
+	padding-right: 1em !important;
+	padding-left: 1em !important;
+}
+.m-padded-lr-max{
+	padding-right: 20px !important;
+	padding-left: 20px !important;
+}
+
+.m-padded-lr-huge{
+		padding-right: 2em !important;
+		padding-left: 2em !important;
+}
+/*透明度*/
+.m-opacity-big{
+	opacity: 0.6 !important;
+}
+
+/*text*/
+.m-text{
+	font-weight: 300 !important;
+	letter-spacing: 1px !important;
+	line-height: 1.5;
+}
+
+.m-text-thin{
+	font-weight: 300 !important;
+}
+.m-text-spaced{
+	letter-spacing: 1px !important;
+	
+}
+.m-text-line{
+	line-height: 1.8 !important;
+}
+.m-opcity{
+	opacity: 0.8;
+}
+
+.m-container-big {
+	max-width: 58em !important;
+	margin: auto !important;
+}
+
+
+/*-----display------*/
+.m-inline-block{
+	display: inline-block  !important;
+}
+
+/*color*/
+.m-black{
+	color: #333 !important;
+}
+.m-teal{
+	color: #1abc9c !important;
+}
+
+
+/*margin*/
+.m-margin-small{
+	margin-top: 35px !important;
+	margin-bottom: 35px !important;
+}
+.m-margin-big{
+	position: absolute !important;
+	right: 2px !important;
+	top: 5px !important;
+}
+.m-right-top{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
+.m-margin-mini{
+	margin-bottom: 10px !important;
+}
+
+/*导航的隐藏*/
+.m-mobile-show{
+	display: none !important;
+}
+
+@media screen and (max-width:768px){
+	.m-mobile-hide{
+		display: none !important;
+	}
+	.m-mobile-show{
+	display: block !important;
+}
+}
+
+/*绝对布局*/
+.m-fixed{
+	position: fixed !important;
+	z-index: 10 !important;
+	
+}
+.m-right-bottom{
+	bottom: 20px !important;
+	right: 60px !important;
+}
